@@ -11,7 +11,7 @@ if(isset($_POST["action"])){
         case "insert":
             $_POST = escape_arr($connection, $_POST);
             $_POST["password"] = hash("sha256", $_POST["password"]);
-            checkRights($_POST["rights"]);
+            checkRights(intval($_POST["rights"]));
             $result = pg_fetch_all(pg_execute($connection, "insert_workers", array($_POST["name"],$_POST["position"],
                                     $_POST["sallary"],$_POST["boss_id"],$_POST["filiation_id"],
                                     $_POST["login"],$_POST["password"], intval($_POST["rights"]))));

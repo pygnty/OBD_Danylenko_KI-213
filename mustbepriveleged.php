@@ -15,7 +15,7 @@ function checkRights($newRights)
 {
     global $connection;
     $rights = pg_fetch_all(pg_execute($connection, "get_rights", array($_COOKIE["login"])))[0]["rights"];
-    if ($rights > intval($newRights)) {
+    if ($rights < intval($newRights)) {
         header('Location: http://localhost/noPriveleges.php');
         exit();
     }
